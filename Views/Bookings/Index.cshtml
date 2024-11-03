@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Test_menu.Models.Booking>
+
+    @{
+    ViewData["Title"] = "Index";
+    }
+
+    <h1>Booked resources</h1>
+
+
+    @if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger" id="result-alert" role="alert">
+        @TempData["ErrorMessage"]
+    </div>
+}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.DateFrom)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DateTo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BookedQuantity)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Resource.Name)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateFrom)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateTo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BookedQuantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Resource.Name)
+                </td>
+                <td>
+
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Cancel</a>
+                </td>
+            </tr>
+}
+        </tbody>
+    </table>

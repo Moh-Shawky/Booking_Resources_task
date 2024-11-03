@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Test_menu.Models.Resource>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Resources</h1>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success" id="result-alert" role="alert">
+        @TempData["SuccessMessage"]
+    </div>
+}
+<p>
+    <a asp-action="Create" class="btn-lg">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                    @if (item.Quantity > 0)
+                    {
+                        <a asp-action="Booking" asp-route-id="@item.Id" class="btn btn-info">Book here</a>
+                    }
+                    else
+                    {
+                        <a class="btn btn-info disabled" aria-disabled="true">Book here</a>
+                    }
+              
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
